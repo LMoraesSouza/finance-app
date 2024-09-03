@@ -21,7 +21,6 @@ export const useGetTransaction = (id?: string) => {
             return {
                 ...data,
                 amount: convertAmountFromMiliUnits(data.amount)
-
             }
         }
     })
