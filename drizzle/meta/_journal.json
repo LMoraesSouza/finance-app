@@ -1,0 +1,34 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1724102221879,
+      "tag": "0000_orange_moonstone",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1724102841454,
+      "tag": "0001_cute_jack_power",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1724617508832,
+      "tag": "0002_previous_thunderbird",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1724627223871,
+      "tag": "0003_equal_captain_midlands",
+      "breakpoints": true
+    }
+  ]
+}
