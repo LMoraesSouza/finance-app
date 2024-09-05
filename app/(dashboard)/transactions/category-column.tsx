@@ -3,6 +3,7 @@ import { useOpenTransaction } from "@/app/features/transactions/hooks/use-open-t
 
 import { cn } from "@/lib/utils";
 import { TriangleAlert } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 type Props = {
     id: string
@@ -16,6 +17,8 @@ export function CategoryColumn ({
     category,
     categoryId
 }: Props) {
+    const { t } = useTranslation()
+
     const { onOpen: onOpenCategory } = useOpenCategory()
     const { onOpen: onOpenTransaction } = useOpenTransaction()
 
@@ -32,7 +35,7 @@ export function CategoryColumn ({
             )}
         >
             {!category && <TriangleAlert className="mr-2 size-4 shrink-0"/>}
-            {category || "Uncategorized"}
+            {category || t("Uncategorized")}
         </div>
     )
 }

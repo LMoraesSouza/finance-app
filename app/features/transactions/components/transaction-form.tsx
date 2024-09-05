@@ -19,6 +19,7 @@ import { DatePicker } from '@/components/date-picker'
 import { Textarea } from '@/components/ui/textarea'
 import { AmountInput } from '@/components/input-amount'
 import { convertAmountToMiliUnits } from '@/lib/utils'
+import { useTranslation } from 'react-i18next'
 
 const formSchema = z.object({
     date: z.coerce.date(),
@@ -59,6 +60,7 @@ export function TransactionForm({
     categoryOptions,
     onCreateCategory
 }: Props) {
+    const { t } = useTranslation()
     const form = useForm<FormValues>({
         resolver: zodResolver(formSchema),
         defaultValues: defaultValues
@@ -106,11 +108,11 @@ export function TransactionForm({
                         return (
                             <FormItem>
                                 <FormLabel>
-                                    Account
+                                    {t("Account")}
                                 </FormLabel>
                                 <FormControl>
                                     <Select 
-                                        placeholder='Select an account'
+                                        placeholder={t("sheet.transaction.accountPlaceholder")}
                                         options={accountOptions}
                                         onCreate={onCreateAccount}
                                         value={field.value}
@@ -129,11 +131,11 @@ export function TransactionForm({
                         return (
                             <FormItem>
                                 <FormLabel>
-                                    Category
+                                    {t("Category")}
                                 </FormLabel>
                                 <FormControl>
                                     <Select 
-                                        placeholder='Select a category'
+                                        placeholder={t("sheet.transaction.categoryPlaceholder")}
                                         options={categoryOptions}
                                         onCreate={onCreateCategory}
                                         value={field.value}
@@ -152,12 +154,12 @@ export function TransactionForm({
                         return (
                             <FormItem>
                                 <FormLabel>
-                                    Payee
+                                    {t("Payee")}
                                 </FormLabel>
                                 <FormControl>
                                     <Input
                                         disabled={disabled}
-                                        placeholder='Add a payee'
+                                        placeholder={t("sheet.transaction.payeePlaceholder")}
                                         {...field}
                                     />
                                 </FormControl>
@@ -172,7 +174,7 @@ export function TransactionForm({
                         return (
                             <FormItem>
                                 <FormLabel>
-                                    Amount
+                                    {t("Amount")}
                                 </FormLabel>
                                 <FormControl>
                                     <AmountInput
@@ -192,13 +194,13 @@ export function TransactionForm({
                         return (
                             <FormItem>
                                 <FormLabel>
-                                    Notes
+                                    {t("Notes")}
                                 </FormLabel>
                                 <FormControl>
                                     <Textarea
                                         {...field}
                                         value={field.value || ''}
-                                        placeholder='Optional notes'
+                                        placeholder={t("sheet.transaction.notesPlaceholder")}
                                         disabled={disabled}
                                     />
                                 </FormControl>
@@ -211,7 +213,7 @@ export function TransactionForm({
                     disabled={disabled} 
                     className='w-full'
                 >
-                    {id? "Save changes" : 'Create transaction'}
+                    {id? t("sheet.transaction.edit.confirmButton") : t("sheet.transaction.new.confirmButton")}
                 </Button>
                 {!!id &&
                     <Button 
@@ -222,7 +224,7 @@ export function TransactionForm({
                         variant='outline'
                     >
                         <Trash className='size-4 mr-2'/>
-                        Delete Transaction
+                        {t("sheet.transaction.edit.deleteButton")}
                     </Button>
 
                 }

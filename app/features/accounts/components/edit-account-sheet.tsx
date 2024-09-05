@@ -15,6 +15,7 @@ import { Loader2 } from "lucide-react"
 import { useEditAccount } from "../api/use-edit-account"
 import { useDeleteAccount } from "../api/use-delete-account"
 import { useConfirm } from "@/hooks/use-confirm"
+import { useTranslation } from "react-i18next"
 
 
 const formSchema = insertAccountSchema.pick({
@@ -24,10 +25,12 @@ const formSchema = insertAccountSchema.pick({
 type FormValues = z.input<typeof formSchema>;
 
 export function EditAccountSheet() {
+    const { t } = useTranslation()
+
     const {isOpen, onClose, id} = useOpenAccount()
     const [ConfirmDialog, confirm] = useConfirm(
-        "Are you sure?",
-        "You are about to delete this account."
+        t("confirm.sure"),
+        t("confirm.delete.account")
     )
 
     const accountQuery = useGetAccount(id)
@@ -72,10 +75,10 @@ export function EditAccountSheet() {
                 <SheetContent className='space-y-4'>
                     <SheetHeader>
                         <SheetTitle>
-                            Edit Account
+                            {t("sheet.account.edit.title")}
                         </SheetTitle>
                         <SheetDescription>
-                            Edit an existing account
+                            {t("sheet.account.edit.message")}
                         </SheetDescription>
                     </SheetHeader>
                     {isLoading ?

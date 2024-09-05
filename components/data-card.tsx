@@ -4,6 +4,7 @@ import { VariantProps, cva } from "class-variance-authority"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card"
 import { CountUp } from "./count-up"
 import { Skeleton } from "./ui/skeleton"
+import { useTranslation } from "react-i18next"
 
 const boxVariant = cva(
     "rounded-md p-3 shrink-0" ,
@@ -58,7 +59,8 @@ export function DataCard({
     dateRange,
     percentageChange = 0
 }: DataCardProps) {
-    const isExpense = title === "Expenses"
+    const { t } = useTranslation()
+    const isExpense = title === (t("Expenses"))
 
     return (
         <Card className='border-none drop-shadow-sm'>
@@ -97,7 +99,7 @@ export function DataCard({
                     percentageChange > 0 && isExpense && "text-rose-500",
                     percentageChange < 0 && isExpense && "text-emerald-500",
                 )}>
-                    {formatPercentage(percentageChange, {addPrefix: true})} from last period
+                    {formatPercentage(percentageChange, {addPrefix: true})} {t("fromLastPeriod")}
                 </p>
             </CardContent>
         </Card>

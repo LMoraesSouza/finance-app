@@ -19,6 +19,7 @@ import { useCreateAccount } from "../../accounts/api/use-create-account"
 import { useGetAccounts } from "../../accounts/api/use-get-accounts"
 import { useCreateCategory } from "../../categories/api/use-create-category"
 import { useGetCategories } from "../../categories/api/use-get-categories"
+import { useTranslation } from "react-i18next"
 
 
 const formSchema = insertTransactionSchema.omit({
@@ -28,10 +29,12 @@ const formSchema = insertTransactionSchema.omit({
 type FormValues = z.input<typeof formSchema>;
 
 export function EditTransactionSheet() {
+    const { t } = useTranslation()
+
     const {isOpen, onClose, id} = useOpenTransaction()
     const [ConfirmDialog, confirm] = useConfirm(
-        "Are you sure?",
-        "You are about to delete this transaction."
+        t("confirm.sure"),
+        t("confirm.delete.transaction")
     )
 
     const transactionQuery = useGetTransaction(id)
@@ -120,10 +123,10 @@ export function EditTransactionSheet() {
                 <SheetContent className='space-y-4'>
                     <SheetHeader>
                         <SheetTitle>
-                            Edit Transaction
+                            {t("sheet.transaction.edit.title")}
                         </SheetTitle>
                         <SheetDescription>
-                            Edit an existing transaction
+                        {t("sheet.transaction.new.title")}
                         </SheetDescription>
                     </SheetHeader>
                     {isLoading ?

@@ -12,6 +12,7 @@ import { AccountForm } from "./account-form"
 import { UseFormGetValues } from "react-hook-form"
 import { z } from "zod"
 import { insertAccountSchema } from "@/db/schema"
+import { useTranslation } from "react-i18next"
 
 
 const formSchema = insertAccountSchema.pick({
@@ -21,6 +22,8 @@ const formSchema = insertAccountSchema.pick({
 type FormValues = z.input<typeof formSchema>;
 
 export function NewAccountSheet() {
+    const { t } = useTranslation()
+
     const {isOpen, onClose} = useNewAccount()
     
     const mutation = useCreateAccount()
@@ -38,10 +41,10 @@ export function NewAccountSheet() {
             <SheetContent className='space-y-4'>
                 <SheetHeader>
                     <SheetTitle>
-                        New Account
+                        {t("sheet.account.new.title")}
                     </SheetTitle>
                     <SheetDescription>
-                        Create a new account to track your transactions.
+                        {t("sheet.account.new.message")}
                     </SheetDescription>
                 </SheetHeader>
                 <AccountForm 

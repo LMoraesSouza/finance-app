@@ -12,6 +12,7 @@ import { CategoryForm } from "./category-form"
 import { UseFormGetValues } from "react-hook-form"
 import { z } from "zod"
 import { insertCategorySchema } from "@/db/schema"
+import { useTranslation } from "react-i18next"
 
 
 const formSchema = insertCategorySchema.pick({
@@ -21,6 +22,8 @@ const formSchema = insertCategorySchema.pick({
 type FormValues = z.input<typeof formSchema>;
 
 export function NewCategorySheet() {
+    const { t } = useTranslation()
+
     const {isOpen, onClose} = useNewCategory()
     
     const mutation = useCreateCategory()
@@ -38,10 +41,10 @@ export function NewCategorySheet() {
             <SheetContent className='space-y-4'>
                 <SheetHeader>
                     <SheetTitle>
-                        New Category
+                        {t("sheet.category.new.title")}
                     </SheetTitle>
                     <SheetDescription>
-                        Create a new category to organize your transactions.
+                    {t("sheet.category.new.message")}
                     </SheetDescription>
                 </SheetHeader>
                 <CategoryForm 

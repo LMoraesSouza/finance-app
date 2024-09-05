@@ -15,6 +15,7 @@ import { Loader2 } from "lucide-react"
 import { useEditCategory } from "../api/use-edit-category"
 import { useDeleteCategory } from "../api/use-delete-category"
 import { useConfirm } from "@/hooks/use-confirm"
+import { useTranslation } from "react-i18next"
 
 
 const formSchema = insertCategorySchema.pick({
@@ -24,10 +25,12 @@ const formSchema = insertCategorySchema.pick({
 type FormValues = z.input<typeof formSchema>;
 
 export function EditCategorySheet() {
+    const { t } = useTranslation()
+
     const {isOpen, onClose, id} = useOpenCategory()
     const [ConfirmDialog, confirm] = useConfirm(
-        "Are you sure?",
-        "You are about to delete this category."
+        t("confirm.sure"),
+        t("confirm.delete.category")
     )
 
     const categoryQuery = useGetCategory(id)
@@ -72,10 +75,10 @@ export function EditCategorySheet() {
                 <SheetContent className='space-y-4'>
                     <SheetHeader>
                         <SheetTitle>
-                            Edit Category
+                            {t("sheet.category.edit.title")}
                         </SheetTitle>
                         <SheetDescription>
-                            Edit an existing category
+                            {t("sheet.category.edit.message")}
                         </SheetDescription>
                     </SheetHeader>
                     {isLoading ?

@@ -2,14 +2,16 @@ import { Upload } from "lucide-react";
 import {useCSVReader} from 'react-papaparse'
 
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
 
 type Props = {
     onUpload: (results: any) => void
 }
 
 export function UploadButton({onUpload}: Props) {
-    const { CSVReader } = useCSVReader()
+    const { t } = useTranslation()
 
+    const { CSVReader } = useCSVReader()
 
     return (
         <CSVReader onUploadAccepted={onUpload}>
@@ -21,7 +23,7 @@ export function UploadButton({onUpload}: Props) {
                     {...getRootProps()}
                 >
                     <Upload className="size-4 mr-2"/>
-                    Import
+                    {t("Import")}
                 </Button>
              )   
             }

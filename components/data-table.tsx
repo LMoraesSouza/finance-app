@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/table"
 import { Trash } from "lucide-react"
 import { useConfirm } from "@/hooks/use-confirm"
+import { useTranslation } from "react-i18next"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -42,9 +43,11 @@ export function DataTable<TData, TValue>({
   onDelete,
   disabled
 }: DataTableProps<TData, TValue>) {
+    const { t } = useTranslation()
+
     const [ConfirmDialog, confirm] = useConfirm(
-        "Are you sure?",
-        "You are about to perform a bulk delete"
+        t("confirm.sure"),
+        t("confirm.delete.bulk")
     )
 
     const [sorting, setSorting] = React.useState<SortingState>([])
@@ -96,7 +99,7 @@ export function DataTable<TData, TValue>({
                         className='ml-auto font-normal text-xs'
                     >
                         <Trash className='size-4 mr-2' />
-                        Delete ({table.getFilteredSelectedRowModel().rows.length})
+                        {`${t("Delete")} (${table.getFilteredSelectedRowModel().rows.length})`}
                     </Button>
                 )}
             </div>
@@ -137,7 +140,7 @@ export function DataTable<TData, TValue>({
                     ) : (
                         <TableRow>
                         <TableCell colSpan={columns.length} className="h-24 text-center">
-                            No results.
+                            {t("NoResults")}
                         </TableCell>
                         </TableRow>
                     )}
@@ -146,8 +149,8 @@ export function DataTable<TData, TValue>({
             </div>
             <div className="flex items-center justify-end space-x-2 py-4">
                 <div className="flex-1 text-sm text-muted-foreground">
-                    {table.getFilteredSelectedRowModel().rows.length} of{" "}
-                    {table.getFilteredRowModel().rows.length} row(s) selected.
+                    {table.getFilteredSelectedRowModel().rows.length} {t("of")}{" "}
+                    {table.getFilteredRowModel().rows.length} {t("rowSelected")}.
                 </div>
                 
                 <Button
@@ -156,7 +159,7 @@ export function DataTable<TData, TValue>({
                     onClick={() => table.previousPage()}
                     disabled={!table.getCanPreviousPage()}
                 >
-                    Previous
+                    {t("Previous")}
                 </Button>
                 <Button
                     variant="outline"
@@ -164,7 +167,7 @@ export function DataTable<TData, TValue>({
                     onClick={() => table.nextPage()}
                     disabled={!table.getCanNextPage()}
                 >
-                    Next
+                    {t("Next")}
                 </Button>
             </div>
         </div>

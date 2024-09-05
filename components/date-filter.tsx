@@ -18,8 +18,11 @@ import { DateRange } from "react-day-picker"
 import { url } from "inspector"
 import { ChevronDown } from "lucide-react"
 import { Calendar } from "./ui/calendar"
+import { useTranslation } from "react-i18next"
 
 export function DateFilter() {
+    const { t } = useTranslation() 
+
     const router = useRouter()
     const pathname = usePathname()
 
@@ -95,7 +98,7 @@ export function DateFilter() {
                             className="w-full"
                             variant='outline'
                         >
-                            Reset
+                            {t("Reset")}
                         </Button>
                     </PopoverClose>
 
@@ -105,7 +108,7 @@ export function DateFilter() {
                             disabled={!date?.from || !date?.to}
                             className="w-full"
                         >
-                            Apply
+                            {t("Apply")}
                         </Button>
                     </PopoverClose>
                 </div>

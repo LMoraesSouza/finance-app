@@ -8,6 +8,7 @@ import {
     TooltipProvider,
     TooltipTrigger
 } from "@/components/ui/tooltip"
+import { useTranslation } from 'react-i18next'
 
 type Props = {
     value: string;
@@ -22,6 +23,8 @@ export function AmountInput({
     placeholder,
     disabled
 }: Props) {
+    const { t } = useTranslation()
+
     const parsedValue = parseFloat(value)
     const isIncome = parsedValue > 0;
     const isExpense = parsedValue < 0
@@ -53,7 +56,7 @@ export function AmountInput({
                         </button>
                     </TooltipTrigger>
                     <TooltipContent>
-                        Use [+] for income and [-] for expenses
+                        {t("tooltip.incomeExpense")}
                     </TooltipContent>
                 </Tooltip>
             </TooltipProvider>
@@ -68,8 +71,8 @@ export function AmountInput({
                 disabled={disabled}
             />
             <p className='text-xs text-muted-foreground mt-2'>
-                {isIncome && "This will count as income"}
-                {isExpense && "This will count as expense"}
+                {isIncome && t("tooltip.countAsIncome")}
+                {isExpense && t("tooltip.countAsExpense")}
             </p>
         </div>
     )

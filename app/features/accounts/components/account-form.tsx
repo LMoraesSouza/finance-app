@@ -14,6 +14,7 @@ import {
     FormLabel,
     FormMessage,
 } from '@/components/ui/form'
+import { useTranslation } from 'react-i18next'
 
 const formSchema = insertAccountSchema.pick({
     name: true
@@ -36,6 +37,8 @@ export function AccountForm({
     onDelete,
     disabled
 }: Props) {
+    const { t } = useTranslation()
+
     const form = useForm<FormValues>({
         resolver: zodResolver(formSchema),
         defaultValues: defaultValues
@@ -59,12 +62,12 @@ export function AccountForm({
                         return (
                             <FormItem>
                                 <FormLabel>
-                                    Name
+                                    {t("Name")}
                                 </FormLabel>
                                 <FormControl>
                                     <Input 
                                         disabled={disabled}
-                                        placeholder="e.g. Cash, Bank, Credit Card"
+                                        placeholder={t("sheet.account.inputPlaceholder")}
                                         {...field}
                                     />
                                 </FormControl>
@@ -76,7 +79,7 @@ export function AccountForm({
                     disabled={disabled} 
                     className='w-full'
                 >
-                    {id? "Save changes" : 'Create account'}
+                    {id? t("sheet.account.edit.confirmButton") : t("sheet.account.new.confirmButton")}
                 </Button>
                 {!!id &&
                     <Button 
@@ -87,7 +90,7 @@ export function AccountForm({
                         variant='outline'
                     >
                         <Trash className='size-4 mr-2'/>
-                        Delete Account
+                        {t("sheet.account.edit.deleteButton")}
                     </Button>
 
                 }

@@ -14,6 +14,7 @@ import {
     FormLabel,
     FormMessage,
 } from '@/components/ui/form'
+import { useTranslation } from 'react-i18next'
 
 const formSchema = insertCategorySchema.pick({
     name: true
@@ -36,6 +37,8 @@ export function CategoryForm({
     onDelete,
     disabled
 }: Props) {
+    const { t } = useTranslation()
+    
     const form = useForm<FormValues>({
         resolver: zodResolver(formSchema),
         defaultValues: defaultValues
@@ -59,12 +62,12 @@ export function CategoryForm({
                         return (
                             <FormItem>
                                 <FormLabel>
-                                    Name
+                                    {t("Name")}
                                 </FormLabel>
                                 <FormControl>
                                     <Input 
                                         disabled={disabled}
-                                        placeholder="e.g. Food, Travel, etc."
+                                        placeholder={t("sheet.category.inputPlaceholder")}
                                         {...field}
                                     />
                                 </FormControl>
@@ -76,7 +79,7 @@ export function CategoryForm({
                     disabled={disabled} 
                     className='w-full'
                 >
-                    {id? "Save changes" : 'Create category'}
+                    {id? t("sheet.category.edit.confirmButton") : t("sheet.category.new.confirmButton")}
                 </Button>
                 {!!id &&
                     <Button 
@@ -87,7 +90,7 @@ export function CategoryForm({
                         variant='outline'
                     >
                         <Trash className='size-4 mr-2'/>
-                        Delete Category
+                        {t("sheet.category.edit.deleteButton")}
                     </Button>
 
                 }

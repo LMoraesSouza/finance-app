@@ -9,8 +9,10 @@ import {
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select"
 import { useGetAccounts } from "@/app/features/accounts/api/use-get-accounts"
 import { useGetSummary } from "@/app/features/summary/api/use-get-summary"
+import { useTranslation } from "react-i18next"
 
 export function AccountFilter(){
+    const { t } = useTranslation()
     const router = useRouter()
     const pathname = usePathname()
 
@@ -58,7 +60,7 @@ export function AccountFilter(){
             </SelectTrigger>
             <SelectContent>
                 <SelectItem value='all'>
-                    All accounts
+                    {t("allAccounts")}
                 </SelectItem>
                 {accounts?.map((account) => (
                     <SelectItem

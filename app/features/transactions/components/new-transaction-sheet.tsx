@@ -17,6 +17,7 @@ import { useGetCategories } from "../../categories/api/use-get-categories"
 import { useGetAccounts } from "../../accounts/api/use-get-accounts"
 import { useCreateAccount } from "../../accounts/api/use-create-account"
 import { Loader2 } from "lucide-react"
+import { useTranslation } from "react-i18next"
 
 
 const formSchema = insertTransactionSchema.omit({
@@ -26,6 +27,8 @@ const formSchema = insertTransactionSchema.omit({
 type FormValues = z.input<typeof formSchema>;
 
 export function NewTransactionSheet() {
+    const { t } = useTranslation()
+
     const {isOpen, onClose} = useNewTransaction()
     
     const createMutation = useCreateTransaction()
@@ -77,10 +80,10 @@ export function NewTransactionSheet() {
             <SheetContent className='space-y-4'>
                 <SheetHeader>
                     <SheetTitle>
-                        New Transaction
+                        {t("sheet.transaction.new.title")}
                     </SheetTitle>
                     <SheetDescription>
-                        Create a new transaction to track your transactions.
+                    {t("sheet.transaction.new.message")}
                     </SheetDescription>
                 </SheetHeader>
                 {

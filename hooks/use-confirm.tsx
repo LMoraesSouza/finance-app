@@ -9,11 +9,14 @@ import {
     DialogHeader,
     DialogTitle
 } from '@/components/ui/dialog'
+import { useTranslation } from 'react-i18next'
 
 export const useConfirm = (
     title: string,
     message: string
 ) : [() => JSX.Element, () => Promise<unknown>] => {
+    const { t } = useTranslation()
+
     const [promise, setPromise] = useState<{resolve: (value: boolean) => void} | null>(null)
 
     const confirm = () => new Promise((resolve, reject) => {
@@ -35,7 +38,7 @@ export const useConfirm = (
     }
 
     const ConfirmationDialog = () => (
-        <Dialog open={promise !== null}>
+        <Dialog open={promise !== null} onOpenChange={handleCancel}>
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>
@@ -50,10 +53,10 @@ export const useConfirm = (
                         onClick={handleCancel}
                         variant='outline'
                     >
-                        Cancel
+                        {t("Cancel")}
                     </Button>
                     <Button onClick={handleConfirm}>
-                        Confirm
+                        {t("Confirm")}
                     </Button>
                 </DialogFooter>
             </DialogContent>

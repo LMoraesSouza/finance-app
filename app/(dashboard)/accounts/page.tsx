@@ -14,9 +14,12 @@ import { DataTable } from '@/components/data-table'
 import { useGetAccounts } from '@/app/features/accounts/api/use-get-accounts'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useBulkDeleteAccount } from '@/app/features/accounts/api/use-bulk-delete-accounts'
+import { useTranslation } from 'react-i18next'
 
 
 export default function AccountsPage() {
+    const { t } = useTranslation()
+
     const newAccount = useNewAccount()
     const deleteAccounts = useBulkDeleteAccount()
     const accountsQuery = useGetAccounts()
@@ -48,12 +51,12 @@ export default function AccountsPage() {
             <Card className='border-none drop-shadow-sm'>
                 <CardHeader className='gap-y-2 lg:flex-row lg:items-center lg:justify-between'>
                     <CardTitle className='text-xl line-clamp-1'>
-                        Accounts page
+                        {t("accountsPage")}
                     </CardTitle>
 
                     <Button onClick={newAccount.onOpen} size='sm'>
                         <PlusIcon className='size-4 mr-2'/>
-                        Add new
+                        {t("addNew")}
                     </Button>
                 </CardHeader>
                 <CardContent>

@@ -11,15 +11,17 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { useConfirm } from '@/hooks/use-confirm'
 import { Edit, MoreHorizontal, Trash } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 type Props = {
     id: string
 }
 
 export function Actions({id}: Props) {
+    const { t } = useTranslation()
     const [ConfirmDialog, confirm] = useConfirm(
-        "Are you sure?",
-        "You are about to delete this account"
+        t("confirm.sure"),
+        t("confirm.delete.account")
     )
     
     const deleteMutation = useDeleteAccount(id)    
@@ -52,7 +54,7 @@ export function Actions({id}: Props) {
                         onClick={() => onOpen(id)}
                     >
                         <Edit className='size-4 mr-2'/>
-                        Edit
+                        {t("Edit")}
                     </DropdownMenuItem>
                     <DropdownMenuItem 
                         disabled={deleteMutation.isPending}
@@ -60,7 +62,7 @@ export function Actions({id}: Props) {
                         className='text-red-500 hover:text-red-700 focus:text-red-700'
                     >
                         <Trash className='size-4 mr-2 '/>
-                        Delete
+                        {t("Delete")}
                     </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>

@@ -7,6 +7,7 @@ import { PieVariant } from "./pie-variant"
 import { RadarVariant } from "./radar-variant"
 import { RadialVariant } from "./radial-variant"
 import { Skeleton } from "./ui/skeleton"
+import { useTranslation } from "react-i18next"
 
 
 type Props = {
@@ -19,6 +20,7 @@ type Props = {
 export function SpendingPie({
     data = []
 }: Props) {
+    const { t } = useTranslation()
     const [chartType, setChartType] = useState("pie")
 
     function onTypeChange(type: string) {
@@ -29,7 +31,7 @@ export function SpendingPie({
         <Card className="border-none drop-shadow-sm">
             <CardHeader className="flex space-y-2 lgspace-y-0 lg:flex-row lg:items-center justify-between">
                 <CardTitle className="text-cl line-clamp-1">
-                    Categories
+                    {t("Categories")}
                 </CardTitle>
 
                 <Select
@@ -46,7 +48,7 @@ export function SpendingPie({
                                 <PieChart className="size-4 mr-2 shrink-0"/>
 
                                 <p className="line-clamp-1">
-                                    Pie Chart
+                                    {t("chart.pie")}
                                 </p>
                             </div>
                         </SelectItem>
@@ -55,7 +57,7 @@ export function SpendingPie({
                                 <Radar className="size-4 mr-2 shrink-0"/>
                                 
                                 <p className="line-clamp-1">
-                                    Radar Chart
+                                    {t("chart.radar")}
                                 </p>
                             </div>
                         </SelectItem>
@@ -65,7 +67,7 @@ export function SpendingPie({
                                 <Target className="size-4 mr-2 shrink-0"/>
                                 
                                 <p className="line-clamp-1">
-                                    Radial Chart
+                                    {t("chart.radial")}
                                 </p>
                             </div>
                         </SelectItem>
@@ -78,7 +80,7 @@ export function SpendingPie({
                     <div className="flex flex-col gap-y-4 items-center justify-center h-[350px] w-full">
                         <FileSearch className='size-6 text-muted-foreground'/>
                         <p className="text-muted-foreground text-sm">
-                            No data for this period
+                            {t("chart.noData")}
                         </p>
                     </div>    
                     :

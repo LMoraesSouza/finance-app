@@ -10,6 +10,7 @@ import { useState } from 'react';
 import { ImportTable } from './import-table';
 import { convertAmountToMiliUnits } from '@/lib/utils';
 import { format, parse } from 'date-fns';
+import { useTranslation } from 'react-i18next';
 
 
 const dateFormat = "yyyy-MM-dd HH:mm:ss";
@@ -37,6 +38,8 @@ export function ImportCard({
     onCancel,
     onSubmit
 }: Props){
+    const { t } = useTranslation()
+
     const [selectedColumns , setSelectedColumns] = useState<SelectedColumnsState>({})
 
     const headers = data[0]
@@ -117,7 +120,7 @@ export function ImportCard({
             <Card className='border-none drop-shadow-sm'>
                 <CardHeader className='gap-y-2 lg:flex-row lg:items-center lg:justify-between'>
                     <CardTitle className='text-xl line-clamp-1'>
-                        Import Transactions
+                        {t("importTransactions")}
                     </CardTitle>
                     <div className='flex flex-col lg:flex-row gap-y-2 items-center gap-2'>
                         <Button 
@@ -126,7 +129,7 @@ export function ImportCard({
                             className="w-full lg-w-auto"
                         >
                             
-                            Cancel
+                            {t("Cancel")}
                         </Button>
                         <Button
                             size='sm'
@@ -134,7 +137,7 @@ export function ImportCard({
                             disabled={progress < requiredOptions.length}
                             onClick={handleContinue}
                         >
-                            Continue ({progress} / {requiredOptions.length})
+                            {t("Continue")} ({progress} / {requiredOptions.length})
                         </Button>
                     </div>
                 </CardHeader>

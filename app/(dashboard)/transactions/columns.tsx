@@ -13,6 +13,7 @@ import { formatCurrency } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import { AccountColumn } from "./account-column"
 import { CategoryColumn } from "./category-column"
+import { DataGridHeaderButton } from "@/components/data-grid-header-button"
 
 export type ResponseType = InferResponseType<typeof client.api.transactions.$get, 200>["data"][0]
 
@@ -43,14 +44,13 @@ export const columns: ColumnDef<ResponseType>[] = [
         accessorKey: "date",
         header: ({ column }) => {
             return (
-              <Button
-                variant="ghost"
+              <DataGridHeaderButton
+                label="Date"
                 onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
               >
-                
-                Date
+              
                 <ArrowUpDown className="ml-2 h-4 w-4" />
-              </Button>
+              </DataGridHeaderButton>
             )
         },
         cell: ({row}) => {
@@ -67,14 +67,12 @@ export const columns: ColumnDef<ResponseType>[] = [
       accessorKey: "category",
       header: ({ column }) => {
           return (
-            <Button
-              variant="ghost"
+            <DataGridHeaderButton
+              label="Category"
               onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
             >
-              
-              Category
               <ArrowUpDown className="ml-2 h-4 w-4" />
-            </Button>
+            </DataGridHeaderButton>
           )
       },
       cell: ({row}) => {
@@ -93,14 +91,12 @@ export const columns: ColumnDef<ResponseType>[] = [
       accessorKey: "payee",
       header: ({ column }) => {
           return (
-            <Button
-              variant="ghost"
+            <DataGridHeaderButton
+              label="Payee"
               onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
             >
-              
-              Payee
               <ArrowUpDown className="ml-2 h-4 w-4" />
-            </Button>
+            </DataGridHeaderButton>
           )
       },
       
@@ -109,14 +105,13 @@ export const columns: ColumnDef<ResponseType>[] = [
       accessorKey: "amount",
       header: ({ column }) => {
           return (
-            <Button
-              variant="ghost"
+            <DataGridHeaderButton
+              label="Amount"
               onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
             >
               
-              Amount
               <ArrowUpDown className="ml-2 h-4 w-4" />
-            </Button>
+            </DataGridHeaderButton>
           )
       },
       cell: ({row}) => {
@@ -136,14 +131,13 @@ export const columns: ColumnDef<ResponseType>[] = [
       accessorKey: "account",
       header: ({ column }) => {
           return (
-            <Button
-              variant="ghost"
+            <DataGridHeaderButton
+              label="Account"
               onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
             >
               
-              Account
               <ArrowUpDown className="ml-2 h-4 w-4" />
-            </Button>
+            </DataGridHeaderButton>
           )
       },
       cell: ({row}) => {

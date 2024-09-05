@@ -6,8 +6,11 @@ import  {FaPiggyBank} from 'react-icons/fa'
 import  {FaArrowTrendDown,  FaArrowTrendUp, } from 'react-icons/fa6'
 import { useSearchParams } from "next/navigation"
 import { DataCard, DataCardLoading } from "./data-card"
+import { useTranslation } from "react-i18next"
 
 export function DataGrid(){
+    const { t } = useTranslation()
+    
     const {data, isLoading } = useGetSummary()
 
     const params = useSearchParams()
@@ -29,7 +32,7 @@ export function DataGrid(){
     return (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 pb-2 mb-8">
             <DataCard 
-                title="Remaining"
+                title={t("Balance")}
                 value={data?.remainingAmount}
                 percentageChange={data?.remainingChange}
                 icon={FaPiggyBank}
@@ -37,7 +40,7 @@ export function DataGrid(){
                 dateRange={dateRangeLabel}
             />
             <DataCard 
-                title="Income"
+                title={t("Income")}
                 value={data?.incomeAmount}
                 percentageChange={data?.incomeChange}
                 icon={FaArrowTrendUp}
@@ -45,7 +48,7 @@ export function DataGrid(){
                 dateRange={dateRangeLabel}
             />
             <DataCard 
-                title="Expenses"
+                title={t("Expenses")}
                 value={data?.expensesAmount}
                 percentageChange={data?.expensesChange}
                 icon={FaArrowTrendDown}

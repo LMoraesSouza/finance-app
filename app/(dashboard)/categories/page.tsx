@@ -14,9 +14,11 @@ import { DataTable } from '@/components/data-table'
 import { useGetCategories } from '@/app/features/categories/api/use-get-categories'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useBulkDeleteCategory } from '@/app/features/categories/api/use-bulk-delete-categories'
+import { useTranslation } from 'react-i18next'
 
 
 export default function CategoriesPage() {
+    const { t } = useTranslation()
     const newCategory = useNewCategory()
     const deleteCategories = useBulkDeleteCategory()
     const categoriesQuery = useGetCategories()
@@ -48,12 +50,12 @@ export default function CategoriesPage() {
             <Card className='border-none drop-shadow-sm'>
                 <CardHeader className='gap-y-2 lg:flex-row lg:items-center lg:justify-between'>
                     <CardTitle className='text-xl line-clamp-1'>
-                        Categories page
+                        {t("categoriesPage")}
                     </CardTitle>
 
                     <Button onClick={newCategory.onOpen} size='sm'>
                         <PlusIcon className='size-4 mr-2'/>
-                        Add new
+                        {t("addNew")}
                     </Button>
                 </CardHeader>
                 <CardContent>

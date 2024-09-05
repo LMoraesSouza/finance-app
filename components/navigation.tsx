@@ -7,32 +7,11 @@ import { Sheet, SheetContent, SheetTrigger} from  './ui/sheet'
 import { useState } from 'react'
 import { Button } from './ui/button'
 import { Menu } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
-
-const routes =[
-    {
-        href: '/',
-        label: "Overview"
-    },
-    {
-        href: '/transactions',
-        label: "Transactions"
-    },
-    {
-        href: '/accounts',
-        label: "Accounts"
-    },
-    {
-        href: '/categories',
-        label: "Categories"
-    },
-    {
-        href: '/settings',
-        label: "Settings"
-    },
-]
 
 export function Navigation(){
+    const { t } = useTranslation()
     const [isOpen, setIsOpen] = useState(false)
 
     const router = useRouter()
@@ -43,6 +22,29 @@ export function Navigation(){
         router.push(href)
         setIsOpen(false)
     }
+
+    const routes =[
+        {
+            href: '/',
+            label: t("Overview")
+        },
+        {
+            href: '/transactions',
+            label: t("Transactions")
+        },
+        {
+            href: '/accounts',
+            label: t("Accounts")
+        },
+        {
+            href: '/categories',
+            label: t("Categories")
+        },
+        {
+            href: '/settings',
+            label: t("Settings")
+        },
+    ]
 
     if(isMobile){
         return(
@@ -68,7 +70,7 @@ export function Navigation(){
                                     variant={route.href === pathname ? "secondary" : "ghost" }
                                     onClick={() => onClick(route.href)}
                                 >
-                                    {route.label}
+                                    {(route.label)}
                                 </Button>
                             )
                         })}

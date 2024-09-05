@@ -21,6 +21,7 @@ import { transactions as transactionSchema } from '@/db/schema'
 import { useSelectAccount } from '@/app/features/accounts/hooks/use-select-account'
 import { toast } from 'sonner'
 import { useBulkCreateTransaction } from '@/app/features/transactions/api/use-bulk-create-transactions copy'
+import { useTranslation } from 'react-i18next'
 
 enum VARIANTS {
     LIST = "LIST",
@@ -34,6 +35,8 @@ const INITIAL_IMPORT_RESULTS ={
 }
 
 export default function TransactionsPage() {
+    const { t } = useTranslation()
+
     const [AccountDialog, confirm] = useSelectAccount()
     const [variant, setVariant] = useState<VARIANTS>(VARIANTS.LIST)
     const [importResults, setImportResults] = useState(INITIAL_IMPORT_RESULTS)
@@ -62,7 +65,7 @@ export default function TransactionsPage() {
         const accountId = await confirm()
 
         if(!accountId){
-            return toast.error("Please select an account to continue.")
+            return toast.error(t("selectAccountToContinue"))
         }
 
         const data = values.map((value) => ({
@@ -115,7 +118,7 @@ export default function TransactionsPage() {
             <Card className='border-none drop-shadow-sm'>
                 <CardHeader className='gap-y-2 lg:flex-row lg:items-center lg:justify-between'>
                     <CardTitle className='text-xl line-clamp-1'>
-                        Transactions history
+                        {t("transactionsHistory")}
                     </CardTitle>
                     <div className='flex flex-col lg:flex-row gap-y-2 items-center gap-2'>
                         <Button 
@@ -124,7 +127,7 @@ export default function TransactionsPage() {
                             size='sm'
                         >
                             <PlusIcon className='size-4 mr-2'/>
-                            Add new
+                            {t("addNew")}
                         </Button>
                         <UploadButton 
                             onUpload={onUpload} 
